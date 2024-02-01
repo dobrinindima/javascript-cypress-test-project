@@ -9,10 +9,7 @@ jobs:
       image: cypress/base:latest
       options: --user 1001
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          build: cypress run
-          browser: chrome
+      - name: Install Cypress
+        run: npm install cypress --save-dev
+      - name: Run Cypress
+        run: cypress run
