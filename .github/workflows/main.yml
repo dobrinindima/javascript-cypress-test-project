@@ -17,7 +17,7 @@ jobs:
         with:
           # Disable running of tests within install job
           runTests: false
-          build: npm run build
+          build: npm install cypress --save-dev
 
       - name: Save build folder
         uses: actions/upload-artifact@v4
@@ -45,6 +45,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          build: npm install cypress --save-dev
           start: npx cypress run
           browser: chrome
