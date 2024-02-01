@@ -12,3 +12,7 @@ Autotests for the site https://the-internet.herokuapp.com/ written in Javascript
 ## Run tests from the file
 
 `'./node_modules/.bin/cypress' run --spec 'cypress/e2e/the-internet/main-page.cy.js'`
+
+## To CLI tools
+
+`npx cypress open`
