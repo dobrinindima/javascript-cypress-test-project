@@ -1,48 +1,18 @@
-name: Cypress Tests with Dependency and Artifact Caching
+name: Cypress Tests
 
 on: push
 
 jobs:
-  install:
+  tests-run:
     runs-on: ubuntu-22.04
     container:
       image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
-      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cypress install
-        uses: cypress-io/github-action@v6
-        with:
-          # Disable running of tests within install job
-          runTests: false
-          build: npm install cypress --save-dev
-
-      - name: Save build folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: build
-
-  cypress-run:
-    runs-on: ubuntu-22.04
-    container:
-      image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
-      options: --user 1001
-    needs: install
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Download the build folder
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: build
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+      - name: Cypress install and run
+        uses: cypress-io/github-action@v2
         with:
           start: npx cypress run
           browser: chrome
