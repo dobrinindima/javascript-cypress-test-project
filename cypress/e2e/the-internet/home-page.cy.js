@@ -7,7 +7,15 @@ context('Main Page', () => {
         mainPage.open()
     })
 
-    it.only('has needed elements', () => {
+    it('has correct title', () => {
+        cy.title().should('eq', 'The Internet')
+    })
+
+    it('has correct ULR', () => {
+        cy.location('pathname').should('contain', '/')
+    })
+
+    it('has needed elements', () => {
         cy.get(mainPage.h1).should('have.text', 'Welcome to the-internet')
         cy.get(mainPage.h2).should('have.text', 'Available Examples')
     })
